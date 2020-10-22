@@ -9,42 +9,6 @@
 import UIKit
 import MJRefresh
 
-class HistoryCell: UITableViewCell {
-    lazy var timeLabel :UILabel = {
-        let label = UILabel.init()
-        label.font = UIFont.boldSystemFont(ofSize: 14)
-        label.textColor = .black
-        return label
-    }()
-    
-    lazy var contentLabel :UILabel = {
-        let label = UILabel.init()
-        label.font = UIFont.systemFont(ofSize: 12)
-        label.numberOfLines = 0
-        label.textColor = .gray
-        return label
-    }()
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        contentView.addSubview(timeLabel)
-        timeLabel.snp.makeConstraints { (make) in
-            make.left.top.equalToSuperview().offset(15)
-            make.width.equalTo(screenWidth - 30)
-        }
-        
-        contentView.addSubview(contentLabel)
-        contentLabel.snp.makeConstraints { (make) in
-            make.edges.equalTo(UIEdgeInsets(top: 45, left: 15, bottom: 15, right: 15))
-        }
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
-
 class HistoryViewController: UIViewController {
 
     lazy var tableView:UITableView = {
@@ -57,7 +21,7 @@ class HistoryViewController: UIViewController {
     }()
     
     var dataSource:RequestHistoryModel = RequestHistoryModel()
-    
+    var newestCacheModel:CacheModel?
     
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -70,6 +34,8 @@ class HistoryViewController: UIViewController {
         
         NotificationCenter.default.addObserver(forName: Notification.Name.githubResponse, object: nil, queue: OperationQueue.main) {  [weak self] notification in
             guard let `self` = self else { return }
+            guard let model = notification.object as? CacheModel else { return }
+            self.newestCacheModel = model
             self.view.makeToast("有新的数据缓存了")
         }
     }
@@ -114,6 +80,13 @@ extension HistoryViewController:UITableViewDataSource,UITableViewDelegate
         let time = dataSource.timestamps[indexPath.row]
         let cell :HistoryCell = tableView.dequeueReusableCell(withIdentifier: HistoryCell.description()) as! HistoryCell
         cell.timeLabel.text = DateFormatterInstance.shared.displayTimeString(Double(time))
+        if let newModel = newestCacheModel,newModel.timestamp == time{
+            cell.timeLabel.textColor = .green
+            cell.contentLabel.textColor = .green
+        }else{
+            cell.timeLabel.textColor = .black
+            cell.contentLabel.textColor = .gray
+        }
         return cell
     }
     

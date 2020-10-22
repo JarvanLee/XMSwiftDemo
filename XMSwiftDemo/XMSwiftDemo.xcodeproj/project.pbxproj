@@ -23,6 +23,7 @@
 		DA00B1E12541345800D9AD22 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA00B1E02541345800D9AD22 /* CacheManager.swift */; };
 		DA00B1E5254158DC00D9AD22 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA00B1E4254158DC00D9AD22 /* Toast.swift */; };
 		DA00B1E725416B2000D9AD22 /* ArchiveManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA00B1E625416B2000D9AD22 /* ArchiveManager.swift */; };
+		DA00B1F52541C39D00D9AD22 /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA00B1F42541C39D00D9AD22 /* HistoryCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		DA00B1E02541345800D9AD22 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		DA00B1E4254158DC00D9AD22 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		DA00B1E625416B2000D9AD22 /* ArchiveManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveManager.swift; sourceTree = "<group>"; };
+		DA00B1F42541C39D00D9AD22 /* HistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +170,7 @@
 		DA00B1CB25404FD200D9AD22 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				DA00B1F42541C39D00D9AD22 /* HistoryCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -393,6 +396,7 @@
 				DA00B1D62540790B00D9AD22 /* GlobalConfig.swift in Sources */,
 				DA00B1D42540712D00D9AD22 /* XMDemo+NotificationName.swift in Sources */,
 				DA00B1C925404FBF00D9AD22 /* GithubModel.swift in Sources */,
+				DA00B1F52541C39D00D9AD22 /* HistoryCell.swift in Sources */,
 				DA00B1E12541345800D9AD22 /* CacheManager.swift in Sources */,
 				DA00B1D225406FC300D9AD22 /* HistoryViewController.swift in Sources */,
 				DA00B1E5254158DC00D9AD22 /* Toast.swift in Sources */,

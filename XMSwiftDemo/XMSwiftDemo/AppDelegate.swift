@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var timerId:String?
     
-    lazy var downloadQueue: OperationQueue = {
+    var downloadQueue: OperationQueue = {
         var queue = OperationQueue()
         queue.name = "Download queue"
         queue.maxConcurrentOperationCount = 5
