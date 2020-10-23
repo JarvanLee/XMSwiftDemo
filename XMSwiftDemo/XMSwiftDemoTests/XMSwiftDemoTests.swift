@@ -12,7 +12,7 @@ import XCTest
 class XMSwiftDemoTests: XCTestCase {
 
     
-    //测试获取历史记录
+    //测试请求历史记录
     func testFetchAllRequestHistory() throws {
         let historyModel = ArchiveManager.fetchRequestHistory(urlString: githubAPI)
         XCTAssertNotNil(historyModel)

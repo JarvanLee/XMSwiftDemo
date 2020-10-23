@@ -20,6 +20,13 @@ class CacheManager: NSObject {
         self.cache.countLimit = 20
     }
     
+    
+    /// 根据url和时间戳获取缓存文件内容
+    /// - Parameters:
+    ///   - urlString: 链接
+    ///   - timestamp: 时间戳字符串
+    ///   - completeClosure: 回调
+    
     func getContent(urlString:String,timestamp:String, completeClosure: @escaping CompletionHandle) {
         let key = NSString(string: urlString+timestamp)
         

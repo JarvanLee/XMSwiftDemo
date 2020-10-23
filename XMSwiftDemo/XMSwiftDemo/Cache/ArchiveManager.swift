@@ -14,7 +14,10 @@ let acrchivesRootFolder =  "\(documentDirectoryInUserDomainMask ?? "")/XMSwiftDe
 
 struct ArchiveManager {
     
-    // MARK: -- 保存请求记录
+    /// 保存请求记录，urlString->MD5为文件名
+    /// - Parameters:
+    ///   - timestamp: 时间戳字符串
+    ///   - urlString: 链接
     static func saveRequestHistory(timestamp:String,urlString:String){
         
         let model = self.fetchRequestHistory(urlString: urlString) ?? RequestHistoryModel()
@@ -31,7 +34,9 @@ struct ArchiveManager {
         }
     }
     
-    // MARK: -- 获取请求记录
+    
+    /// 获取请求记录
+    /// - Parameter urlString: 链接
     static func fetchRequestHistory(urlString:String) -> RequestHistoryModel?{
         var path = acrchivesRootFolder + "/History"
         if (self.creatFilePath(path)) {
@@ -48,7 +53,11 @@ struct ArchiveManager {
         return nil
     }
     
-    // MARK: -- 保存请求下来的数据
+    
+    /// 保存请求下来的数据，urlString->MD5为文件夹名，每一次返回的数据以时间戳为文件名保存
+    /// - Parameters:
+    ///   - model: 返回数据模型
+    ///   - urlString: 链接
     static func saveResponseModel(_ model:CacheModel ,urlString:String){
         do {
             let data = try PropertyListEncoder().encode(model)
