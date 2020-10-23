@@ -14,10 +14,13 @@ class RequestHistoryModel:Codable {
 
 
 struct CacheModel:Codable{
+    
     var timestamp:String
-    var content:String
-    init(timestamp: String, content: String) {
+    var content:String?
+    var res_msg:String?
+    var res_code:Int = 0    //0成功
+    
+    init(timestamp: String) {
         self.timestamp = timestamp
-        self.content = content
     }
 }

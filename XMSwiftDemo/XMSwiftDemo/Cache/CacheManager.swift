@@ -33,7 +33,10 @@ class CacheManager: NSObject {
         DispatchQueue.global().async {
             var content = ""
             if let model = ArchiveManager.fetchResponseContent(timestamp: timestamp, urlString: urlString){
-                content = model.content
+                if model.res_code == 0 ,let json = model.content{
+                    content = json
+                    self.cache.setObject(NSString(string: content), forKey: key)
+                }
             }
             completeClosure(content)
         }
