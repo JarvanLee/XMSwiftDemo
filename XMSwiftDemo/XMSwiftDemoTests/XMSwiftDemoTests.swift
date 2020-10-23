@@ -11,24 +11,33 @@ import XCTest
 
 class XMSwiftDemoTests: XCTestCase {
 
-    override func setUp() {
+    
+    //测试获取历史记录
+    func testFetchAllRequestHistory() throws {
+        let historyModel = ArchiveManager.fetchRequestHistory(urlString: githubAPI)
+        XCTAssertNotNil(historyModel)
+    }
+    
+    //测试存入历史记录
+    func testInsertRequestHistory() {
+        let timestamp = Date().milliStamp
+        ArchiveManager.saveRequestHistory(timestamp: timestamp, urlString: githubAPI)
         
+        let model = ArchiveManager.fetchRequestHistory(urlString: githubAPI)
+        XCTAssertNotNil(model)
+        XCTAssertEqual(model?.timestamps[0], timestamp)
     }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    //测试保存response数据
+    func testResponseCache(){
+        let timestamp = Date().milliStamp
+        let cacheModel = CacheModel.init(timestamp: timestamp, content: "success")
+        
+        ArchiveManager.saveResponseModel(cacheModel, urlString: githubAPI)
+        let model = ArchiveManager.fetchResponseContent(timestamp: timestamp, urlString: githubAPI)
+        
+        XCTAssertNotNil(model)
+        XCTAssertEqual(model?.content, cacheModel.content)
     }
 
 }

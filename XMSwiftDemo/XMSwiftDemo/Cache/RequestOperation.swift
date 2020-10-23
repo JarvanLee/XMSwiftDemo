@@ -8,18 +8,7 @@
 
 import UIKit
 
-struct CacheModel:Codable{
-    var timestamp:String
-    var content:String
-    init(timestamp: String, content: String) {
-        self.timestamp = timestamp
-        self.content = content
-    }
-}
 
-class RequestHistoryModel:Codable {
-    var timestamps:[String] = []
-}
 
 class RequestOperation: Operation {
     var urlString:String?
@@ -37,6 +26,8 @@ class RequestOperation: Operation {
         request.timeoutInterval = 30
         //保存请求记录
         ArchiveManager.saveRequestHistory(timestamp: curTime, urlString: urlStr)
+        
+        //开始抓取数据
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let tmpData = data,let json = String(data: tmpData, encoding: String.Encoding.utf8){
                 let cacheModel = CacheModel(timestamp: curTime, content: json)
